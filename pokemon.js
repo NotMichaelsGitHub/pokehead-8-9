@@ -1,8 +1,6 @@
 $("#submit_button").click(function(event){
     event.preventDefault();
     clearIt();
-    
-    console.log(" lol ");
 
     var sets = [];
     $("#selected-sets input:checkbox:checked").map(function(){
