@@ -80,22 +80,18 @@ $("#submit_button").click(function(event){
 
 $("#clear_button").click(function (event) {
     event.preventDefault();
-
     clearIt()
 });
 
 function doIt(asdf) {
-
-    current_cards = asdf;
+    current_cards = asdf; //set global variable for all cards from the query
 
     var json = asdf;
-
     var tr;
     for (var i = 0; i < json.length; i++) {
         tr = $('<tr/>');
 
         tr.append("<td class='col-sm-2' data-value=\" "+ json[i].name +"\">" + json[i].name + "</td>");
-
         tr.append("<td class=\"col-sm-1\" data-value=\" "+ getSetFromId(json[i]) +"\">" + getSetFromId(json[i]) + "</td>");
 
         if (json[i].supertype = "Pokémon"){
@@ -110,22 +106,22 @@ function doIt(asdf) {
         tr.append("<td class='col-sm-1'  data-value=\" "+ hasAbility(json[i]) +"\"  >" + hasAbility(json[i]) + "</td>");
         tr.append("<td class='col-sm-1' data-value=\" "+ json[i].convertedRetreatCost +"\"   >" + json[i].convertedRetreatCost + "</td>");
         tr.append("<td class='col-sm-1'  data-value=\" "+ json[i].rarity +"\"  >" + json[i].rarity + "</td>");
-
         tr.append("<td class='col-sm-1'  data-value=\" "+ json[i].number +"\"   >" + "<image src='https://images.pokemontcg.io/"+ json[i].setCode+"/"+ json[i].number +"_hires.png' style='height: 117px; width: 83px' onClick='qwerty(" + i + ")' ></image>" + "</td>");
 
-        //tr.append("<td class=\"col-sm-2\"><button id=\"myBtn\" onClick='test(" + i + ")'>Open Modal</button></td>");
-
-        var uid = json[i].number;
         var quert = "\"" + json[i].id + "\"";
 
-        tr.append("<td class=\"col-sm-1\"><input type='checkbox' id='cb_cart' onClick='hmm("   + quert + ")'>Add to cart</td>");
-
+        if(cart_cards_id.includes(json[i].id)){
+            tr.append("<td class=\"col-sm-1\"><input type='checkbox' id='cb_cart' onClick='hmm("   + quert + ")' checked>Add to cart</td>");
+        }
+        else{
+            tr.append("<td class=\"col-sm-1\"><input type='checkbox' id='cb_cart' onClick='hmm("   + quert + ")'>Add to cart</td>");
+        }
 
         $('#display').append(tr);
     }
-
 }
 
+//resets table
 function clearIt() {
     document.getElementById("myTable").innerHTML = "";
 }
@@ -137,19 +133,16 @@ function flatten(arrayToFlatten) {
     }, []);
 }
 
+//scrapes all pokemon from database based on the selected sets
 function filter_one(carddata) {
     var supertype = 'Pokémon';
     carddata = carddata.filter(card => card.supertype == supertype);
 
-    // console.log(carddata.filter(card => card.supertype == supertype))
-
     filter_two(carddata);
-
-
 }
 
+//filters pokemon based on stage
 function filter_two(carddata) {
-
     let filtered_stages = ['Basic', 'Stage 1', 'Stage 2'];
     let selected_stages = [];
     $("#selected-stages input:checkbox:checked").map(function(){
@@ -166,8 +159,8 @@ function filter_two(carddata) {
     filter_three(carddata);
 }
 
+//filters pokemon by rarity
 function filter_three(carddata) {
-
     let filtered_rarity = ['Common', 'Uncommon', 'Rare', 'Rare Holo', 'Rare Holo gx', 'RareUltra', 'Rare Secret'];
     let selected_rarity = [];
     $("#selected-rarity input:checkbox:checked").map(function(){
@@ -184,8 +177,8 @@ function filter_three(carddata) {
     filter_four(carddata);
 }
 
+//filters pokemon based on type
 function filter_four(carddata) {
-
     let filtered_types = ['Colorless', 'Grass', 'Fire', 'Water', 'Lightning', 'Psychic', 'Fighting', 'Darkness', 'Metal', 'Dragon', 'Fairy'];
     let selected_types = [];
     $("#selected-types input:checkbox:checked").map(function(){
@@ -202,8 +195,8 @@ function filter_four(carddata) {
     filter_five(carddata);
 }
 
+//filters pokemon based on if they've got an ability
 function filter_five(carddata) {
-
     let filtered_ability = ['yes', 'no'];
     let selected_ability = [];
     $("#selected-ability input:checkbox:checked").map(function(){
@@ -228,8 +221,8 @@ function filter_five(carddata) {
     filter_six(carddata);
 }
 
+//filters pokemon based by retreat cost
 function filter_six(carddata) {
-
     let filtered_retreat = ['0', '1', '2', '3', '4'];
     let selected_retreat = [];
     $("#selected-retreat input:checkbox:checked").map(function(){
@@ -246,6 +239,7 @@ function filter_six(carddata) {
     doIt(carddata);
 }
 
+//returns if the pokemon has an ability or not
 function hasAbility(json) {
     if(json.ability == null){
         return 'no ability'
@@ -255,6 +249,7 @@ function hasAbility(json) {
     }
 }
 
+//returns set name from the given ID
 function getSetFromId(json) {
     if(json.setCode == 'sm1'){
         return ("Sun & Moon");
