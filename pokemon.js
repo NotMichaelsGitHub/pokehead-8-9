@@ -1,6 +1,8 @@
 $("#submit_button").click(function(event){
     event.preventDefault();
     clearIt();
+    
+    console.log(" dabs ");
 
     var sets = [];
     $("#selected-sets input:checkbox:checked").map(function(){
