@@ -10,8 +10,6 @@ var span_two = document.getElementsByClassName("close")[1];
 //on click checkbox (on the table)
 function hmm(id) {
 
-    //console.log(id);
-
     var check = cart_cards_id.includes(id);
 
     if(check == false){
@@ -20,8 +18,6 @@ function hmm(id) {
 
         cart_cards_id = cart_cards_id.filter(cart => cart != id);
     }
-
-    console.log(cart_cards_id);
 }
 
 
