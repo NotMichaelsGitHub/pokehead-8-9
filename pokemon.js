@@ -10,7 +10,7 @@ $("#submit_button").click(function(event){
     if(sets.length > 1){
         var thing = sets.map(function (set) {
             return $.ajax({
-                url: 'http://localhost:63342/MASTER_POKEHEADDOTCOM/en_US/' + set + ".json/",
+                url: 'https://raw.githubusercontent.com/NotMichaelsGitHub/pokehead-8-9/master/en_US/' + set + ".json/",
                 dataType: 'json',
                 method: 'GET'
             })
@@ -41,7 +41,7 @@ $("#submit_button").click(function(event){
     }
     else{
         var thing = $.ajax({
-            url: 'http://localhost:63342/MASTER_POKEHEADDOTCOM/en_US/' + sets[0] + ".json/",
+            url: 'https://raw.githubusercontent.com/NotMichaelsGitHub/pokehead-8-9/master/en_US/' + sets[0] + ".json/",
             dataType: 'json',
             method: 'GET'
         });
