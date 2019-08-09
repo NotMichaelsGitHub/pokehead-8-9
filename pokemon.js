@@ -2,7 +2,7 @@ $("#submit_button").click(function(event){
     event.preventDefault();
     clearIt();
     
-    console.log(" dabs ");
+    console.log(" lol ");
 
     var sets = [];
     $("#selected-sets input:checkbox:checked").map(function(){
@@ -12,7 +12,7 @@ $("#submit_button").click(function(event){
     if(sets.length > 1){
         var thing = sets.map(function (set) {
             return $.ajax({
-                url: 'https://notmichaelsgithub.github.io/pokehead-8-9/en_US/' + set + ".json/",
+                url: 'https://notmichaelsgithub.github.io/pokehead-8-9/en_US/' + set + ".json",
                 dataType: 'json',
                 method: 'GET'
             })
@@ -43,7 +43,7 @@ $("#submit_button").click(function(event){
     }
     else{
         var thing = $.ajax({
-            url: 'https://notmichaelsgithub.github.io/pokehead-8-9/en_US/' + sets[0] + ".json/",
+            url: 'https://notmichaelsgithub.github.io/pokehead-8-9/en_US/' + sets[0] + ".json",
             dataType: 'json',
             method: 'GET'
         });
